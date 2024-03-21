@@ -1,0 +1,39 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+- host: httpbin.org
+  name: example_service
+  port: 80
+  protocol: http
+  routes:
+  - name: example_route
+    paths:
+    - /mock
+    strip_path: true
+# https://github.com/Kong/kong/issues/2149
+- host: host.docker.internal
+  name: servicea
+  port: 8081
+  protocol: http
+  routes:
+  - name: routea
+    paths:
+    - /a
+    strip_path: true
+
+plugins:
+  - name: jwt
+    route: routea
+    enabled: true
+    config:
+      key_claim_name: kid
+      claims_to_verify:
+        - exp
+
+consumers:
+- username: login
+  custom_id: login
+  jwt_secrets:
+    - consumer: login
+      secret: TEST
