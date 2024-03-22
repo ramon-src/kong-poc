@@ -7,9 +7,11 @@ https://www.youtube.com/watch?v=OjF95vVldxY
 https://docs.konghq.com/hub/kong-inc/jwt/
 
 
-Run Kong in DB Less mode in a folder kongdbless
+Run Kong in DB Less mode inside the folder kongdbless
 
 ```sh
+cd kongdbless && \
+rm -rf prefix_volume tmp_volume && \
 docker run --read-only -d --name kong-dbless \
 --network=kong-net \
 -v "$(pwd)/declarative:/kong/declarative/" \

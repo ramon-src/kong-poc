@@ -36,4 +36,5 @@ consumers:
   custom_id: login
   jwt_secrets:
     - consumer: login
-      secret: TEST
+      key: "ADD A KEY"
+      secret: "ADD A SECRET"
